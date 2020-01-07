@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoreWebApi_TodoApi.Models
 {
-    public class DatabaseContext : DbContext
+    public class HRContext : DbContext
     {
-        public DatabaseContext(DbContextOptions<DatabaseContext> options):
+        public HRContext(DbContextOptions<HRContext> options):
             base(options)
         {
         }

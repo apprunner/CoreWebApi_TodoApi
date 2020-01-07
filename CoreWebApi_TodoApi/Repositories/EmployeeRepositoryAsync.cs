@@ -9,10 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreWebApi_TodoApi.Repositories
 {
-    public class EmployeeRepository : IEmployeeRepository<Employee>
+    public class EmployeeRepositoryAsync : IEmployeeRepository<Employee>
     {
         private readonly EmployeeContext _context;
-        public EmployeeRepository(EmployeeContext context)
+        public EmployeeRepositoryAsync(EmployeeContext context)
         {
             _context = context;
         }

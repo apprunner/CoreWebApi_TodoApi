@@ -13,8 +13,8 @@ namespace CoreWebApi_TodoApi.Repositories
     public class GenericRepositoryAsync<T> : IGenericRepositoryc<T> where T : BaseEnitiy
     {
         
-        private readonly DatabaseContext _context;
-        public GenericRepositoryAsync(DatabaseContext context)
+        private readonly HRContext _context;
+        public GenericRepositoryAsync(HRContext context)
         {
             _context = context;
         }
