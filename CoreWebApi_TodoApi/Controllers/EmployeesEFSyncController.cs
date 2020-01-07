@@ -6,49 +6,32 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CoreWebApi_TodoApi.Models;
-using CoreWebApi_TodoApi.Repositories;
 
 namespace CoreWebApi_TodoApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeesController : ControllerBase
+    public class EmployeesEFSyncController : ControllerBase
     {
         private readonly EmployeeContext _context;
-        private readonly IEmployeeRepository<Employee> _repo;
 
-        public EmployeesController(EmployeeContext context, IEmployeeRepository<Employee> repo)
+        public EmployeesEFSyncController(EmployeeContext context)
         {
             _context = context;
-            _repo = repo;
-        }
-
-        [HttpGet]
-        public IEnumerable<Employee> GetEmployees()
-        {
-            var result = _repo.GetAllEmployees();
-
-            return result;
-        }
-
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployeesAsync()
-        {
-            var result = await Task.FromResult<ActionResult<IEnumerable<Employee>>>(_repo.GetAllEmployees());
-            return result;
         }
 
         // GET: api/Employees
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
-        //{
-        //    return await _context.Employees.ToListAsync();
-        //}
+        [HttpGet]
+        public ActionResult<IEnumerable<Employee>> GetEmployees()
+        {
+            return  _context.Employees.ToList();
+        }
 
         // GET: api/Employees/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Employee>> GetEmployee(int id)
+        public ActionResult<Employee> GetEmployee(int id)
         {
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = _context.Employees.Find(id);
 
             if (employee == null)
             {
@@ -62,7 +45,7 @@ namespace CoreWebApi_TodoApi.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployee(int id, Employee employee)
+        public IActionResult PutEmployee(int id, Employee employee)
         {
             if (id != employee.Id)
             {
@@ -73,7 +56,7 @@ namespace CoreWebApi_TodoApi.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -94,26 +77,26 @@ namespace CoreWebApi_TodoApi.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
+        public ActionResult<Employee> PostEmployee(Employee employee)
         {
             _context.Employees.Add(employee);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return CreatedAtAction("GetEmployee", new { id = employee.Id }, employee);
         }
 
         // DELETE: api/Employees/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Employee>> DeleteEmployee(int id)
+        public ActionResult<Employee> DeleteEmployee(int id)
         {
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = _context.Employees.Find(id);
             if (employee == null)
             {
                 return NotFound();
             }
 
             _context.Employees.Remove(employee);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return employee;
         }

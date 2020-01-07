@@ -30,10 +30,13 @@ namespace CoreWebApi_TodoApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
-
             services.AddDbContext<EmployeeContext>(opt => opt.UseSqlServer(_config.GetConnectionString("EmployeeDB_SqlServer")));
+            services.AddTransient<IEmployeeRepository<Employee>, EmployeeRepository>();
 
-            services.AddTransient<IEmployeeRepository<Employee>, EmployeeRepository_EFCore>();
+
+            services.AddDbContext<DatabaseContext>(opt => opt.UseSqlServer(_config.GetConnectionString("EmployeeDB_SqlServer")));
+            //services.AddTransient<IRepositoryAsync<Employee>, RepositoryAsync<Employee>>();
+            services.AddScoped(typeof(IGenericRepositoryc<>), typeof(GenericRepositoryAsync<>));
 
             services.AddControllers();
         }
