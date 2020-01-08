@@ -29,13 +29,15 @@ namespace CoreWebApi_TodoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //µù¥U¤@¯ëDbContext
             services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
             services.AddDbContext<EmployeeContext>(opt => opt.UseSqlServer(_config.GetConnectionString("EmployeeDB_SqlServer")));
-            services.AddTransient<IEmployeeRepository<Employee>, EmployeeRepositoryAsync>();
 
+            //µù¥U¤@¯ëRepository
+            services.AddScoped<IEmployeeRepository<Employee>, EmployeeRepositoryAsync>();
 
+            //µù¥Uªx«¬Repository
             services.AddDbContext<HRContext>(opt => opt.UseSqlServer(_config.GetConnectionString("EmployeeDB_SqlServer")));
-            //services.AddTransient<IRepositoryAsync<Employee>, RepositoryAsync<Employee>>();
             services.AddScoped(typeof(IGenericRepositoryc<>), typeof(GenericRepositoryAsync<>));
 
             services.AddControllers();
