@@ -45,7 +45,7 @@ namespace CoreWebApi_TodoApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployee(int id, Employee emp)
         {
-            if (await _repo.Add(emp) == 0)
+            if (await _repo.Update(emp) == 0)
             {
                 return new ObjectResult(new { message = "更新失敗" });
             }
@@ -66,21 +66,22 @@ namespace CoreWebApi_TodoApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Employee>> PostEmployee(Employee emp)
         {
+            /*
             await _repo.Add(emp);
 
             if (await _repo.Add(emp) == 0)
             {
                 return new ObjectResult(new { message = "建立失敗" });
             }
-
-            /*
+            */
+            
             int count = await _repo.Add(emp);
 
             if (count == 0)
             {
                 return new ObjectResult(new { message = "建立失敗" });
             }
-            */
+            
 
             var msgObject = new
             {
