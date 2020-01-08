@@ -19,8 +19,8 @@ https://github.com/apprunner/CoreWebApi_TodoApi.git
  (3)DbContext名稱以專屬特定EmployeeContext命名
  
 3.EmployeesGenericRepoController : 
- (1)使用GenericRepositoryAsync泛型(非同步)，
- (2)完全沒有相依任何Model模型， 可接受任何型別
+ (1)使用GenericRepositoryAsync泛型(非同步)
+ (2)完全沒有相依任何Model模型，可接受任何型別
  (3)DbContext名稱也改為更通用化HRContext，而不是EmployeeContext
 
  4.IActionResult , ActionResult, ObjectResult

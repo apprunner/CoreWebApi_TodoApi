@@ -34,8 +34,8 @@ namespace CoreWebApi_TodoApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(int id)
         {
-            var emp = await _repo.GetById(id);
-
+            var emp = await _repo.GetById(id); 
+            
             return emp;
         }
 
@@ -72,6 +72,15 @@ namespace CoreWebApi_TodoApi.Controllers
             {
                 return new ObjectResult(new { message = "建立失敗" });
             }
+
+            /*
+            int count = await _repo.Add(emp);
+
+            if (count == 0)
+            {
+                return new ObjectResult(new { message = "建立失敗" });
+            }
+            */
 
             var msgObject = new
             {
