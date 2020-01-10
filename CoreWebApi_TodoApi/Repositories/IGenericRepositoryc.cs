@@ -7,12 +7,12 @@ using CoreWebApi_TodoApi.Models;
 
 namespace CoreWebApi_TodoApi.Repositories
 {
-    public interface IGenericRepositoryc<T> where T : BaseEnitiy
+    public interface IGenericRepositoryc<T> where T : class
     {
         Task<ActionResult<T>> GetById(int id);
         Task<ActionResult<IEnumerable<T>>> GetAll();
         Task<int> Add(T entity);
         Task<int> Update(T entity);
-        Task<int> Delete(T entity);
+        Task<int> Delete(int id);
     }
 }

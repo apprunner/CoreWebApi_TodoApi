@@ -10,7 +10,7 @@ using System.Net;
 
 namespace CoreWebApi_TodoApi.Repositories
 {
-    public class GenericRepositoryAsync<T> : IGenericRepositoryc<T> where T : BaseEnitiy
+    public class GenericRepositoryAsync<T> : IGenericRepositoryc<T> where T : class
     {
         
         private readonly HRContext _context;
@@ -42,9 +42,9 @@ namespace CoreWebApi_TodoApi.Repositories
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> Delete(T entity)
+        public async Task<int> Delete(int id)
         {
-            var result = await _context.Set<T>().FindAsync(entity.Id);
+            var result = await _context.Set<T>().FindAsync(id);
             if (result == null)
             {
                 return 0;

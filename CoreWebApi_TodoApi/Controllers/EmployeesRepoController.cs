@@ -22,11 +22,20 @@ namespace CoreWebApi_TodoApi.Controllers
             _repo = repo;
         }
 
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Employee>>> GetDepartmentEmployees()
+        //{
+        //    var result = await _repo.GetAll();
+
+        //    return result;
+        //}
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetAllEmployees()
         {
+            
             var result = await _repo.GetAll();
-
+    
             return result;
         }
 
@@ -34,6 +43,7 @@ namespace CoreWebApi_TodoApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(int id)
         {
+            
             var emp = await _repo.GetById(id); 
             
             return emp;

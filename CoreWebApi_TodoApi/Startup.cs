@@ -36,8 +36,10 @@ namespace CoreWebApi_TodoApi
             //µù¥U¤@¯ëRepository
             services.AddScoped<IEmployeeRepository<Employee>, EmployeeRepositoryAsync>();
 
+
             //µù¥Uªx«¬Repository
             services.AddDbContext<HRContext>(opt => opt.UseSqlServer(_config.GetConnectionString("EmployeeDB_SqlServer")));
+
 
             services.AddScoped(typeof(IGenericRepositoryc<>), typeof(GenericRepositoryAsync<>));
 

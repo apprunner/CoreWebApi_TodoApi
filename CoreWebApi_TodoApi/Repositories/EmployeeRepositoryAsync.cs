@@ -17,6 +17,13 @@ namespace CoreWebApi_TodoApi.Repositories
             _context = context;
         }
 
+        public string DepartmentName { get; set; } = "研發部";
+        public async Task<ActionResult<Employee>> GetByDepartment(int depId)
+        {
+            
+            return await _context.Employees.FindAsync(depId);
+        }
+
         public async Task<ActionResult<Employee>> GetById(int id)
         {
             return await _context.Employees.FindAsync(id);

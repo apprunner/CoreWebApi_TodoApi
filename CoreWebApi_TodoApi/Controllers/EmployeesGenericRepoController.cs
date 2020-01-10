@@ -91,9 +91,9 @@ namespace CoreWebApi_TodoApi.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Employee>> DeleteEmployee(int id)
         {
-            if (await _repo.Delete(new Employee { Id = id }) == 0)
+            if (await _repo.Delete(id)==0)
             {
-                return new ObjectResult(new { message = "刪除失敗" });
+                return new ObjectResult(new { message = "Delete刪除失敗" });
             }
 
             return Ok(StatusCodes.Status200OK);
